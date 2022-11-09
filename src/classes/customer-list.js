@@ -1,9 +1,11 @@
-class CustomerList{
-  constructor()
+class CustomerList {
+  constructor(){
+    
+  }
 }
 
 
 
 
 
-module.exports = CustomerList
+export default CustomerList
