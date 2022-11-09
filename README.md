@@ -10,7 +10,7 @@ That's right, _clone_ not fork. You will use this repo multiple times, but you c
 1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
 1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
 
-Now try to commit something (just add a line in the README) and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+Now try to commit something (just add a line in the README) and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHcd ub.
 
 ## Setup
 
@@ -34,7 +34,7 @@ You have to be very intentional with where you add your feature code. This repo 
 
 Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
 
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
+Here is a video that walks through some information about [import and export](https:c//www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
 
 ### HTML
 
