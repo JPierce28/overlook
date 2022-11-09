@@ -26,7 +26,7 @@ describe("CustomerList", () => {
     expect(customer).to.equal(customers[2])
   })
   it('Should let you know if that id does not exist', () => {
-    let customer = customerList.filterById('51')
+    let customer = customerList.filterById(51)
     expect(customer).to.equal('Sorry we could not find that customer, try another id!')
   })
 })
