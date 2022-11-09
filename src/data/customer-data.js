@@ -200,4 +200,4 @@ const customers = [
   name: "Eldridge Muller"
   }
   ]
-module.exports = customers
+export default customers
