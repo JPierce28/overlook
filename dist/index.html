@@ -7,8 +7,115 @@
   <title>Webpack Starter Kit</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
+  <header class="main-header">
+    <h3 class="customer-name">Signed in as: Customer30</h3>
+    <h1>Asgard Inn & Suites</h1>
+    <button class="my-bookings-button">My Bookings</button>
+  </header>
+  <main class="main-section">
+    <section class="welcome-container">
+      <header class="welcome-header">
+        <h1>This Could Be Your View!</h1>
+      </header>
+      <img id="iceland-image" src="./images/iceland.jpg" alt="welcome image of Iceland">
+      </img>
+    </section>
+    <section class="booking-container">
+      <header class="booking-header">
+        <div class="calendar-container">
+          <h3 class="filter">Choose Your Date</h3>
+          <input class="calendar" type="date" id="start" name="form-date" min="2021-09-01" max="2024-12-31">
+        </div>
+        <div class="title">
+          <h1>Book Now!</h1>
+        </div>
+        <div class="filter-type">
+          <h3 class="filter">Filter By Room Type</h3>
+          <select name="all-room-types" class="select-room-type">
+            <option value="suite" >Suite</option>
+            <option value="residential-suite">Residential Suite</option>
+            <option value="single-room">Single Room</option>
+            <option value="junior-suite">Junior Suite</option>
+          </select>
+          <button class="filter-by-type">Check Availability</button>
+        </div>
+      </header>
+      <div class="book-room">
+        <p>Date: 2022/04/22</p>
+        <p>Room Number: 1</p>
+        <p>Room Type: Residential Suite</p>
+        <p>Bidet: Yes</p>
+        <p>Cost Per Night: $300.4</p>
+        <p>Beds: 2</p>
+        <button class="book-now">Book Now</button>
+      </div>
+      <div class="book-room">
+        <p>Date: 2022/04/22</p>
+        <p>Room Number: 1</p>
+        <p>Room Type: Residential Suite</p>
+        <p>Bidet: Yes</p>
+        <p>Cost Per Night: $300.4</p>
+        <p>Beds: 2</p>
+        <button class="book-now">Book Now</button>
+      </div>
+      <div class="book-room">
+        <p>Date: 2022/04/22</p>
+        <p>Room Number: 1</p>
+        <p>Room Type: Residential Suite</p>
+        <p>Bidet: Yes</p>
+        <p>Cost Per Night: $300.4</p>
+        <p>Beds: 2</p>
+        <button class="book-now">Book Now</button>
+      </div>
+      <div class="book-room">
+        <p>Date: 2022/04/22</p>
+        <p>Room Number: 1</p>
+        <p>Room Type: Residential Suite</p>
+        <p>Bidet: Yes</p>
+        <p>Cost Per Night: $300.4</p>
+        <p>Beds: 2</p>
+        <button class="book-now">Book Now</button>
+      </div>
+      <div class="book-room">
+        <p>Date: 2022/04/22</p>
+        <p>Room Number: 1</p>
+        <p>Room Type: Residential Suite</p>
+        <p>Bidet: Yes</p>
+        <p>Cost Per Night: $300.4</p>
+        <p>Beds: 2</p>
+        <button class="book-now">Book Now</button>
+      </div>
+      <div class="book-room">
+        <p>Date: 2022/04/22</p>
+        <p>Room Number: 1</p>
+        <p>Room Type: Residential Suite</p>
+        <p>Bidet: Yes</p>
+        <p>Cost Per Night: $300.4</p>
+        <p>Beds: 2</p>
+        <button class="book-now">Book Now</button>
+      </div>
+    </section>
+  </main>
+  <section class="my-bookings hidden">
+    <section class="my-booking-container">
+      <header class="my-booking-header">
+        <div class="my-title">
+          <h1>My Bookings</h1>
+        </div>
+        <div class="total-spent">
+          <h3 class="filter">Total I've Spent: $1000</h3>
+        </div>
+      </header>
+      <div class="booking-list">
+        <p>Date: 2022/04/22</p>
+        <p>Room Number: 1</p>
+        <p>Room Type: Residential Suite</p>
+        <p>Bidet: Yes</p>
+        <p>Cost Per Night: $300.4</p>
+        <p>Beds: 2</p>
+        <button class="book-now">Book Now</button>
+      </div>
+  </section>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
