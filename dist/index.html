@@ -8,7 +8,9 @@
 </head>
 <body>
   <header class="main-header">
+    <h3 class="customer-name">Signed in as: Customer30</h3>
     <h1>Asgard Inn & Suites</h1>
+    <button class="my-bookings-button">My Bookings</button>
   </header>
   <main class="main-section">
     <section class="welcome-container">
@@ -20,8 +22,9 @@
     </section>
     <section class="booking-container">
       <header class="booking-header">
-        <div class="calendar">
-          
+        <div class="calendar-container">
+          <h3 class="filter">Choose Your Date</h3>
+          <input class="calendar" type="date" id="start" name="form-date" min="2021-09-01" max="2024-12-31">
         </div>
         <div class="title">
           <h1>Book Now!</h1>
@@ -93,6 +96,26 @@
       </div>
     </section>
   </main>
+  <section class="my-bookings hidden">
+    <section class="my-booking-container">
+      <header class="my-booking-header">
+        <div class="my-title">
+          <h1>My Bookings</h1>
+        </div>
+        <div class="total-spent">
+          <h3 class="filter">Total I've Spent: $1000</h3>
+        </div>
+      </header>
+      <div class="booking-list">
+        <p>Date: 2022/04/22</p>
+        <p>Room Number: 1</p>
+        <p>Room Type: Residential Suite</p>
+        <p>Bidet: Yes</p>
+        <p>Cost Per Night: $300.4</p>
+        <p>Beds: 2</p>
+        <button class="book-now">Book Now</button>
+      </div>
+  </section>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 
