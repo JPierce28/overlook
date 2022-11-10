@@ -1,3 +1,145 @@
+* {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  background: white;
+  height: 100vh;
+  margin: 0;
+}
+
+.main-header {
+  border-bottom: solid 4px lightblue;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.booking-header {
+  border-bottom: solid 2px black;
+  height: 25vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.welcome-header {
+  height: 10vh;
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.main-section {
+  height: 200vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.welcome-container {
+  box-shadow: 3px 3px 3px 3px grey;
+  height: 50vh;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.booking-container {
+  box-shadow: 3px 3px 3px 3px grey;
+  border: solid 2px rgb(112, 189, 233);
+  height: 100vh;
+  width: 80vw;
+  overflow-y: scroll;
+}
+
+.filter-type {
+  width: 33%;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.select-room-type{
+  width: 50%;
+  height: 20%;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-size: large;
+}
+
+.filter-by-type{
+  width: 50%;
+  height: 20%;
+  border-radius: 10px;
+  font-size: large;
+  cursor: pointer;
+  margin-bottom: 15px;
+  background: transparent;
+  border: 1px solid #91C9FF;
+  outline: none;
+  transition: 1s ease-in-out;
+}
+
+.filter-by-type:hover {
+  transition: 1s ease-in-out;
+  background: #c0defb;
+}
+
+.book-room {
+  margin: 10px;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: large;
+  border-radius: 15px;
+  border: dotted 3px lightblue;
+}
+
+.book-now{
+  width: 10%;
+  height: 20%;
+  border-radius: 10px;
+  font-size: large;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #5faaef;
+  outline: none;
+  transition: 1s ease-in-out;
+  font-size: large;
+}
+
+.book-now:hover {
+  transition: 1s ease-in-out;
+  background: #c0defb;
+  
+}
+
+#iceland-image {
+  height: 80%
 }
