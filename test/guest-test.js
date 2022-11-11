@@ -187,7 +187,6 @@ describe("Guest", () => {
     expect(currentGuest.myBookings(allBookings)).to.deep.equal(user1Bookings)
   })
   it("Should have a method to show how much I've spent", () => {
-    // currentGuest.totalSpent(allBookings)
     expect(currentGuest.totalSpent(allBookings, allRooms)).to.equal(8806.730000000001)
   })
 })

@@ -97,8 +97,13 @@
     </section>
   </main>
   <section class="my-bookings hidden">
+    <header class="my-bookings-header">
+      <h3 class="customer-name">Signed in as: Customer30</h3>
+    <h1>My Bookings</h1>
+    <button class="return-home-button">Return Home</button>
+    </header>
     <section class="my-booking-container">
-      <header class="my-booking-header">
+      <header class="my-booking-header hidden">
         <div class="my-title">
           <h1>My Bookings</h1>
         </div>
@@ -106,15 +111,9 @@
           <h3 class="filter">Total I've Spent: $1000</h3>
         </div>
       </header>
-      <div class="booking-list">
-        <p>Date: 2022/04/22</p>
-        <p>Room Number: 1</p>
-        <p>Room Type: Residential Suite</p>
-        <p>Bidet: Yes</p>
-        <p>Cost Per Night: $300.4</p>
-        <p>Beds: 2</p>
-        <button class="book-now">Book Now</button>
-      </div>
+      <section class="booking-list-container">
+
+      </section>
   </section>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
