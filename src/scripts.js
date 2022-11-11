@@ -10,13 +10,14 @@ import RoomsList from '../src/classes/Rooms';
 
 
 // Global Variables go here
-let currentGuest, allBookings, allRooms
+let currentGuest, allBookings, allRooms, currentDate
 const guest = {
   id: 1,
   name: "Leatha Ullrich"
   }
 allBookings = new BookingsList(bookings)
 allRooms = new RoomsList(rooms)
+currentDate = "2022/04/22"
 
 //query selectors
 
@@ -25,17 +26,35 @@ const returnHomeButton = document.querySelector('.return-home-button')
 const myBookingsPage = document.querySelector('.my-bookings')
 const homePage = document.querySelector('.main-section')
 const bookingListContainer = document.querySelector('.booking-list-container')
+const availableBookingsContainer = document.querySelector('.available-bookings-container')
 const displaySpent = document.querySelector('.total-spent')
 const mainHeader = document.querySelector('.main-header')
 const myBookingsHeader = document.querySelector('.my-booking-header')
 //events
 
-window.addEventListener('load', getGuest)
+window.addEventListener('load', loadData)
 myBookingsButton.addEventListener('click', viewMyBookings)
 returnHomeButton.addEventListener('click', returnHome)
 
 
 //event handlers
+
+function loadData() {
+  let availableBookings = allBookings.availableBookings(currentDate, allRooms)
+  availableBookings.forEach(element => {
+    availableBookingsContainer.innerHTML += `
+    <div class="book-room">
+        <p>Date: ${currentDate}</p>
+        <p>Room Number: ${element.number}</p>
+        <p>Room Type: ${element.roomType}</p>
+        <p>Bidet: ${element.bidet}</p>
+        <p>Cost Per Night: ${element.costPerNight}</p>
+        <p>Beds: ${element.numBeds}</p>
+        <button class="book-now">Book Now</button>
+      </div>`
+  })
+  getGuest()
+}
 
 function getGuest() {
   currentGuest = new Guest(guest)
