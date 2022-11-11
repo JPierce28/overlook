@@ -17,6 +17,17 @@ body {
   justify-content: space-around;
 }
 
+.my-bookings-header {
+  border-bottom: solid 4px lightblue;
+  height: 15vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
 .booking-header {
   border-bottom: solid 2px black;
   height: 25vh;
@@ -223,6 +234,24 @@ body {
 }
 
 .my-bookings-button:hover {
+  transition: 1s ease-in-out;
+  background: #c0defb;
+}
+
+.return-home-button {
+  margin-top: 40px;
+  border-radius: 20px;
+  width: 10%;
+  font-size: large;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #5faaef;
+  outline: none;
+  transition: 1s ease-in-out;
+  font-size: large;
+}
+
+.return-home-button:hover {
   transition: 1s ease-in-out;
   background: #c0defb;
 }

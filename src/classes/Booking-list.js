@@ -34,6 +34,16 @@ class BookingsList {
       return filteredRoom
     }
   }
+  availableBookings(dateChoosen, rooms) {
+    let today = this.searchByDate(dateChoosen)
+    let bookingRoom = today.map(booking => {
+      return booking.roomNumber
+    })
+    let allRoom = rooms.allRooms.filter(room => {
+      return !bookingRoom.includes(room.number)
+    })
+    return allRoom
+  }
 }
 
 export default BookingsList
