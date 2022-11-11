@@ -10,19 +10,26 @@ import RoomsList from '../src/classes/Rooms';
 
 
 // Global Variables go here
-let currentGuest, allBookings, allRooms, currentDate
+let currentGuest, allBookings, allRooms, currentDate, date, day, month, year
 const guest = {
   id: 1,
   name: "Leatha Ullrich"
   }
 allBookings = new BookingsList(bookings)
 allRooms = new RoomsList(rooms)
-currentDate = "2022/04/22"
-
+date = new Date()
+day = date.getDate()
+month = date.getMonth()+1
+year = date.getFullYear()
+currentDate = `${year}/${month}/${day}`
+// currentDate = "2022/04/22"
+console.log(currentDate)
 //query selectors
 
 const myBookingsButton = document.querySelector('.my-bookings-button')
 const returnHomeButton = document.querySelector('.return-home-button')
+const filterButton = document.querySelector('.filter-by-type')
+const roomTypeSelect = document.querySelector('.select-room-type')
 const myBookingsPage = document.querySelector('.my-bookings')
 const homePage = document.querySelector('.main-section')
 const bookingListContainer = document.querySelector('.booking-list-container')
@@ -30,19 +37,25 @@ const availableBookingsContainer = document.querySelector('.available-bookings-c
 const displaySpent = document.querySelector('.total-spent')
 const mainHeader = document.querySelector('.main-header')
 const myBookingsHeader = document.querySelector('.my-booking-header')
+
 //events
 
-window.addEventListener('load', loadData)
+window.addEventListener('load', function() { 
+loadData(allBookings, allRooms)
+})
 myBookingsButton.addEventListener('click', viewMyBookings)
 returnHomeButton.addEventListener('click', returnHome)
+filterButton.addEventListener('click', filterByRoomType)
 
 
 //event handlers
 
-function loadData() {
-  let availableBookings = allBookings.availableBookings(currentDate, allRooms)
-  availableBookings.forEach(element => {
-    availableBookingsContainer.innerHTML += `
+function loadData(bookingData, roomsData) {
+  availableBookingsContainer.innerHTML = ''
+  let availableBookings = bookingData.availableBookings(currentDate, roomsData)
+  if(availableBookings.length === 25){
+    roomsData.allRooms.forEach(element => {
+      availableBookingsContainer.innerHTML += `
     <div class="book-room">
         <p>Date: ${currentDate}</p>
         <p>Room Number: ${element.number}</p>
@@ -52,7 +65,21 @@ function loadData() {
         <p>Beds: ${element.numBeds}</p>
         <button class="book-now">Book Now</button>
       </div>`
-  })
+    })
+  } else {
+    availableBookings.forEach(element => {
+      availableBookingsContainer.innerHTML += `
+      <div class="book-room">
+        <p>Date: ${currentDate}</p>
+        <p>Room Number: ${element.number}</p>
+        <p>Room Type: ${element.roomType}</p>
+        <p>Bidet: ${element.bidet}</p>
+        <p>Cost Per Night: ${element.costPerNight}</p>
+        <p>Beds: ${element.numBeds}</p>
+        <button class="book-now">Book Now</button>
+      </div>`
+    })
+  }
   getGuest()
 }
 
@@ -83,6 +110,16 @@ function viewMyBookings() {
   displaySpent.innerHTML = `<h3 class="filter">Total I've Spent: $${allSpent}</h3>`
 }
 
+function filterByRoomType() {
+  let selectValue = roomTypeSelect.value
+  const newSearch = allRooms.searchByType(selectValue)
+  let newRooms = new RoomsList(newSearch)
+  console.log(newRooms);
+  loadData(allBookings, newRooms)
+  if(selectValue === 'Select a Filter'){
+    loadData(allBookings, allRooms)
+  }
+}
 
 //helper functions
 
