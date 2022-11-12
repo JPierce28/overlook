@@ -9,6 +9,7 @@ import bookings from '../src/data/bookings'
 import RoomsList from '../src/classes/Rooms';
 
 
+
 // Global Variables go here
 let currentGuest, allBookings, allRooms, currentDate, date, day, month, year
 const guest = {
@@ -133,11 +134,29 @@ function filterByRoomType() {
   let selectValue = roomTypeSelect.value
   const newSearch = allRooms.searchByType(selectValue)
   let newRooms = new RoomsList(newSearch)
-  console.log(newRooms);
   loadData(allBookings, newRooms)
   if(selectValue === 'Select a Filter'){
     loadData(allBookings, allRooms)
   }
+}
+
+function filterByDate() {
+  let searchDate = calendar.value
+  currentDate = searchDate.replaceAll('-', '/')
+  let filteredDate = allBookings.availableBookings(currentDate, allRooms)
+  availableBookingsContainer.innerHTML = ''
+  filteredDate.forEach(element => {
+    availableBookingsContainer.innerHTML += `
+    <div class="book-room">
+        <p>Date: ${currentDate}</p>
+        <p>Room Number: ${element.number}</p>
+        <p>Room Type: ${element.roomType}</p>
+        <p>Bidet: ${element.bidet}</p>
+        <p>Cost Per Night: ${element.costPerNight}</p>
+        <p>Beds: ${element.numBeds}</p>
+        <button class="book-now">Book Now</button>
+      </div>`
+  })
 }
 
 function returnHome() {
