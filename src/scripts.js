@@ -2,22 +2,16 @@ import './css/styles.css';
 import './images/turing-logo.png'
 import './images/iceland.jpg'
 import BookingsList from '../src/classes/Booking-list'
-import rooms from '../src/data/rooms-data'
 import Guest from '../src/classes/guest'
 import CustomerList from '../src/classes/customer-list'
-import bookings from '../src/data/bookings'
-import RoomsList from '../src/classes/Rooms';
+import RoomsList from '../src/classes/Rooms'
+import {fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer,  customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, getApiData} from './apiCalls'
 
 
 
 // Global Variables go here
-let currentGuest, allBookings, allRooms, currentDate, date, day, month, year
-const guest = {
-  id: 1,
-  name: "Leatha Ullrich"
-  }
-allBookings = new BookingsList(bookings)
-allRooms = new RoomsList(rooms)
+let currentGuest, allBookings, allRooms, currentDate, date, day, month, year, allCustomers
+
 date = new Date()
 day = date.getDate()
 month = date.getMonth()+1
@@ -45,7 +39,7 @@ const myBookingsHeader = document.querySelector('.my-booking-header')
 //events
 
 window.addEventListener('load', function() { 
-loadData(allBookings, allRooms),
+getData(),
 loadDate()
 })
 myBookingsButton.addEventListener('click', viewMyBookings)
@@ -57,6 +51,18 @@ calendarButton.addEventListener('click', filterByDate)
 //event handlers
 function loadDate () {
   calendar.min = `${year}-${month}-${day}`
+}
+
+function getData() {
+  Promise.all([fetchedCustomers, fetchedRooms, fetchedBookings, fetchedSingleCustomer])
+  .then((data) => {
+    allCustomers = new CustomerList(data[0].customers)
+    allRooms = new RoomsList(data[1].rooms)
+    allBookings = new BookingsList(data[2].bookings)
+    currentGuest = new Guest(data[3])
+    loadData(allBookings, allRooms)
+  })
+  .catch((error) => console.log(error))
 }
 
 function loadData(bookingData, roomsData) {
@@ -89,14 +95,7 @@ function loadData(bookingData, roomsData) {
       </div>`
     })
   }
-  getGuest()
 }
-
-function getGuest() {
-  currentGuest = new Guest(guest)
-}
-
-
 
 function viewMyBookings() {
   addHidden(homePage)
