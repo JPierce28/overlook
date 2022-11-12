@@ -36,6 +36,8 @@ const availableBookingsContainer = document.querySelector('.available-bookings-c
 const displaySpent = document.querySelector('.total-spent')
 const mainHeader = document.querySelector('.main-header')
 const myBookingsHeader = document.querySelector('.my-booking-header')
+const displayCustomer = document.querySelector('.customer-name')
+const myName = document.querySelector('.my-name')
 
 //events
 
@@ -64,11 +66,13 @@ function getData() {
     currentGuest = new Guest(data[3])
     loadData(allBookings, allRooms)
   })
-  .catch((error) => console.log(error))
+  .catch((error) => {
+    availableBookingsContainer.innerHTML = `
+    <h2>Sorry, an error occured. Please refresh the page. Error: ${error}</h2>`
+  }); 
 }
 
 function postBooking(addedBooking) {
-  console.log(addedBooking);
   const newPost = postApiData(addedBooking)
   Promise.all([newPost])
     .then((data) => {
@@ -80,10 +84,12 @@ function postBooking(addedBooking) {
       allBookings = new BookingsList(data[0].bookings)
       loadData(allBookings, allRooms)
     })
+  
 }
 
 function loadData(bookingData, roomsData) {
   availableBookingsContainer.innerHTML = ''
+  displayCustomer.innerHTML = `Signed in as: ${currentGuest.name}`
   let availableBookings = bookingData.availableBookings(currentDate, roomsData)
   if(availableBookings.length === 25){
     roomsData.allRooms.forEach(element => {
@@ -98,6 +104,9 @@ function loadData(bookingData, roomsData) {
         <button id="${element.number}" class="book-now">Book Now</button>
       </div>`
     })
+  } else if (availableBookings.length === 0) {
+    availableBookingsContainer.innerHTML += `<h2>We are so sorry, we don't have any availble bookings on this day. We would still love to see you so please adjust your date and or room type filters 🙂</h2>`
+    
   } else {
     availableBookings.forEach(element => {
       availableBookingsContainer.innerHTML += `
@@ -121,6 +130,7 @@ function loadData(bookingData, roomsData) {
 function viewMyBookings() {
   myPastBookings.innerHTML = ''
   myFutureBookings.innerHTML = ''
+  myName.innerHTML = `Signed in as: ${currentGuest.name}`
   addHidden(homePage)
   removeHidden(myBookingsPage)
   addHidden(mainHeader)
