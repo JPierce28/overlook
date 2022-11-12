@@ -9,7 +9,7 @@ class BookingsList {
       }  
     })
     if(filteredBookings.length === 0){
-      return "Hmm we dont see any bookings available on that date. Search a different day please."
+      return "No bookings"
     } else {
       return filteredBookings
     }
@@ -36,6 +36,9 @@ class BookingsList {
   }
   availableBookings(dateChoosen, rooms) {
     let today = this.searchByDate(dateChoosen)
+    if(today === "No bookings"){
+      return rooms.allRooms
+    } else {
     let bookingRoom = today.map(booking => {
       return booking.roomNumber
     })
@@ -43,6 +46,7 @@ class BookingsList {
       return !bookingRoom.includes(room.number)
     })
     return allRoom
+    }
   }
 }
 

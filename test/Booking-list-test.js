@@ -606,7 +606,7 @@ describe("BookingsList", () => {
   })
   it('Should let you know if there are no bookings that day', () => {
     let filterDate = bookingList.searchByDate("2055/04/22")
-    expect(filterDate).to.equal("Hmm we dont see any bookings available on that date. Search a different day please.")
+    expect(filterDate).to.equal("No bookings")
   })
   it('Should be able to filter bookings by user ID', () => {
     let filterUser = bookingList.searchByUser(9)
@@ -626,5 +626,8 @@ describe("BookingsList", () => {
   })
   it('Should return available bookings', () => {
     expect(bookingList.availableBookings("2022/04/22", roomsList)).to.deep.equal(availableRooms)
+  })
+  it('Should return all rooms if there is none booked', () => {
+    expect(bookingList.availableBookings("2022/11/11", roomsList)).to.deep.equal(roomsList.allRooms)
   })
 })
