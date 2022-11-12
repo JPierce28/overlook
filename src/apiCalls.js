@@ -10,8 +10,15 @@ function getApiData(url) {
   return fetchedApi
 }
 
-function postApiData() {
-  
+function postApiData(addBooking) {
+  let postData = fetch(bookingsUrl, {
+    method: 'POST',
+    body: JSON.stringify(addBooking),
+    headers: {'content-type': 'application/json'}
+  })
+  .then(response => response.json())
+  .catch(error => console.log('Post error:', error))
+  return postData
 }
 
 const fetchedCustomers = getApiData(customersUrl)
@@ -19,4 +26,4 @@ const fetchedRooms = getApiData(roomsUrl)
 const fetchedBookings = getApiData(bookingsUrl)
 const fetchedSingleCustomer = getApiData(singleCustomerUrl)
 
-export {customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer, getApiData}
+export {customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer, getApiData, postApiData}

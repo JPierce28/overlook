@@ -5,7 +5,7 @@ import BookingsList from '../src/classes/Booking-list'
 import Guest from '../src/classes/guest'
 import CustomerList from '../src/classes/customer-list'
 import RoomsList from '../src/classes/Rooms'
-import {fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer,  customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, getApiData} from './apiCalls'
+import {fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer,  customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, getApiData, postApiData} from './apiCalls'
 
 
 
@@ -26,6 +26,7 @@ const returnHomeButton = document.querySelector('.return-home-button')
 const filterButton = document.querySelector('.filter-by-type')
 const calendarButton = document.querySelector('.calendar-search')
 const roomTypeSelect = document.querySelector('.select-room-type')
+const defaultValue = document.querySelector('.default-value')
 const calendar = document.querySelector('.calendar') 
 const myBookingsPage = document.querySelector('.my-bookings')
 const homePage = document.querySelector('.main-section')
@@ -48,6 +49,7 @@ filterButton.addEventListener('click', filterByRoomType)
 calendarButton.addEventListener('click', filterByDate)
 
 
+
 //event handlers
 function loadDate () {
   calendar.min = `${year}-${month}-${day}`
@@ -65,6 +67,21 @@ function getData() {
   .catch((error) => console.log(error))
 }
 
+function postBooking(addedBooking) {
+  console.log(addedBooking);
+  const newPost = postApiData(addedBooking)
+  Promise.all([newPost])
+    .then((data) => {
+      console.log(data)
+      return Promise.all([getApiData(bookingsUrl)])
+    })
+    .then((data) => {
+      console.log(data)
+      allBookings = new BookingsList(data[0].bookings)
+      loadData(allBookings, allRooms)
+    })
+}
+
 function loadData(bookingData, roomsData) {
   availableBookingsContainer.innerHTML = ''
   let availableBookings = bookingData.availableBookings(currentDate, roomsData)
@@ -78,7 +95,7 @@ function loadData(bookingData, roomsData) {
         <p>Bidet: ${element.bidet}</p>
         <p>Cost Per Night: ${element.costPerNight}</p>
         <p>Beds: ${element.numBeds}</p>
-        <button class="book-now">Book Now</button>
+        <button id="${element.number}" class="book-now">Book Now</button>
       </div>`
     })
   } else {
@@ -86,18 +103,24 @@ function loadData(bookingData, roomsData) {
       availableBookingsContainer.innerHTML += `
       <div class="book-room">
         <p>Date: ${currentDate}</p>
-        <p>Room Number: ${element.number}</p>
+        <p id="room-number">Room Number: ${element.number}</p>
         <p>Room Type: ${element.roomType}</p>
         <p>Bidet: ${element.bidet}</p>
         <p>Cost Per Night: ${element.costPerNight}</p>
         <p>Beds: ${element.numBeds}</p>
-        <button class="book-now">Book Now</button>
+        <button id="${element.number}" class="book-now">Book Now</button>
       </div>`
     })
   }
+  const addBookingButton = document.querySelectorAll('.book-now')
+  addBookingButton.forEach((button) => {
+    button.addEventListener('click', addBooking)
+  })
 }
 
 function viewMyBookings() {
+  myPastBookings.innerHTML = ''
+  myFutureBookings.innerHTML = ''
   addHidden(homePage)
   removeHidden(myBookingsPage)
   addHidden(mainHeader)
@@ -107,7 +130,7 @@ function viewMyBookings() {
     return booking.date < currentDate
   })
   let futureBookings = allMyBookings.filter(booking => {
-    return booking.date > currentDate
+    return booking.date >= currentDate
   })
   pastBookings.forEach(element => {
     myPastBookings.innerHTML += `
@@ -153,9 +176,19 @@ function filterByDate() {
         <p>Bidet: ${element.bidet}</p>
         <p>Cost Per Night: ${element.costPerNight}</p>
         <p>Beds: ${element.numBeds}</p>
-        <button class="book-now">Book Now</button>
+        <button id="${element.number}" class="book-now">Book Now</button>
       </div>`
   })
+  const addBookingButton = document.querySelectorAll('.book-now')
+  addBookingButton.forEach((button) => {
+    button.addEventListener('click', addBooking)
+  })
+}
+
+function addBooking(event) {
+  const newBooking = {'userID': currentGuest.id, date: currentDate, 'roomNumber': +event.target.id}
+  postBooking(newBooking)
+  roomTypeSelect.value = defaultValue.value
 }
 
 function returnHome() {

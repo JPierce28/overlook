@@ -9,13 +9,13 @@ class Guest{
   totalSpent(bookings, rooms) {
     let allBookings = this.myBookings(bookings)
     let myRooms = allBookings.map(room => {
-      let roomNumber = rooms.allRooms.filter(num => {
-        return num.number === room.roomNumber
-      })
-      return roomNumber
+      return room.roomNumber
     })
-    let amount = myRooms.reduce((acc, nextRoom) => {
-      return acc += nextRoom[0].costPerNight
+    let roomNumber = rooms.allRooms.filter(num => {
+      return myRooms.includes(num.number)
+    })
+    let amount = roomNumber.reduce((acc, nextRoom) => {
+      return acc += nextRoom.costPerNight
     },0)
     return amount
   }
