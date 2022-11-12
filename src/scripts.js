@@ -22,17 +22,20 @@ day = date.getDate()
 month = date.getMonth()+1
 year = date.getFullYear()
 currentDate = `${year}/${month}/${day}`
-// currentDate = "2022/04/22"
-console.log(currentDate)
+
+
 //query selectors
 
 const myBookingsButton = document.querySelector('.my-bookings-button')
 const returnHomeButton = document.querySelector('.return-home-button')
 const filterButton = document.querySelector('.filter-by-type')
+const calendarButton = document.querySelector('.calendar-search')
 const roomTypeSelect = document.querySelector('.select-room-type')
+const calendar = document.querySelector('.calendar') 
 const myBookingsPage = document.querySelector('.my-bookings')
 const homePage = document.querySelector('.main-section')
-const bookingListContainer = document.querySelector('.booking-list-container')
+const myPastBookings = document.querySelector('.past-bookings')
+const myFutureBookings = document.querySelector('.future-bookings')
 const availableBookingsContainer = document.querySelector('.available-bookings-container')
 const displaySpent = document.querySelector('.total-spent')
 const mainHeader = document.querySelector('.main-header')
@@ -41,14 +44,19 @@ const myBookingsHeader = document.querySelector('.my-booking-header')
 //events
 
 window.addEventListener('load', function() { 
-loadData(allBookings, allRooms)
+loadData(allBookings, allRooms),
+loadDate()
 })
 myBookingsButton.addEventListener('click', viewMyBookings)
 returnHomeButton.addEventListener('click', returnHome)
 filterButton.addEventListener('click', filterByRoomType)
+calendarButton.addEventListener('click', filterByDate)
 
 
 //event handlers
+function loadDate () {
+  calendar.min = `${year}-${month}-${day}`
+}
 
 function loadData(bookingData, roomsData) {
   availableBookingsContainer.innerHTML = ''
@@ -87,10 +95,7 @@ function getGuest() {
   currentGuest = new Guest(guest)
 }
 
-function returnHome() {
-  addHidden(myBookingsPage)
-  removeHidden(homePage)
-}
+
 
 function viewMyBookings() {
   addHidden(homePage)
@@ -98,8 +103,22 @@ function viewMyBookings() {
   addHidden(mainHeader)
   removeHidden(myBookingsHeader)
   let allMyBookings = currentGuest.myBookings(allBookings)
-  allMyBookings.forEach(element => {
-    bookingListContainer.innerHTML += `
+  let pastBookings = allMyBookings.filter(booking => {
+    return booking.date < currentDate
+  })
+  let futureBookings = allMyBookings.filter(booking => {
+    return booking.date > currentDate
+  })
+  pastBookings.forEach(element => {
+    myPastBookings.innerHTML += `
+      <div class="booking-list"
+        <p>Date: ${element.date}</p>
+        <p>Room Number: ${element.roomNumber}</p>
+        <p>Booking ID: ${element.id}</p>
+      </div>`
+  })
+  futureBookings.forEach(element => {
+    myFutureBookings.innerHTML += `
       <div class="booking-list"
         <p>Date: ${element.date}</p>
         <p>Room Number: ${element.roomNumber}</p>
@@ -121,7 +140,15 @@ function filterByRoomType() {
   }
 }
 
+function returnHome() {
+  addHidden(myBookingsPage)
+  removeHidden(homePage)
+  removeHidden(mainHeader)
+}
+
 //helper functions
+
+
 
 function addHidden (element) {
   element.classList.add('hidden')

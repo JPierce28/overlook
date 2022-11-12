@@ -24,7 +24,8 @@
       <header class="booking-header">
         <div class="calendar-container">
           <h3 class="filter">Choose Your Date</h3>
-          <input class="calendar" type="date" id="start" name="form-date" min="2022-11-11" max="2024-12-31">
+          <input class="calendar" type="date" id="start" name="form-date" min="" max="2024-12-31">
+          <button class="calendar-search"> Check Availability</button>
         </div>
         <div class="title">
           <h1>Book Now!</h1>
@@ -51,17 +52,21 @@
     <h1>My Bookings</h1>
     <button class="return-home-button">Return Home</button>
     </header>
+    <header class="my-booking-header hidden">
+      <div class="past-bookings-header">
+        <h3>My Past Bookings</h3>
+      </div>
+      <div class="total-spent">
+        <h3 class="filter">Total I've Spent: $1000</h3>
+      </div>
+      <div class="future-bookings-header">
+        <h3>My Future Bookings</h3>
+      </div>
+    </header>
     <section class="my-booking-container">
-      <header class="my-booking-header hidden">
-        <div class="my-title">
-          <h1>My Bookings</h1>
-        </div>
-        <div class="total-spent">
-          <h3 class="filter">Total I've Spent: $1000</h3>
-        </div>
-      </header>
-      <section class="booking-list-container">
-
+      <section class="past-bookings">
+      </section>
+      <section class="future-bookings">
       </section>
   </section>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
