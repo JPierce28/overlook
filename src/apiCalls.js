@@ -16,10 +16,19 @@ function postApiData(addBooking) {
     body: JSON.stringify(addBooking),
     headers: {'content-type': 'application/json'}
   })
-  .then(response => response.json())
+  .then(response => {
+    if(response.ok){
+      console.log('response: ', response)
+      return response.json()
+    } else {   
+      throw new Error("Sorry, an error occured. Please refresh the page.")
+    }
+  })
   .catch(error => console.log('Post error:', error))
   return postData
 }
+
+
 
 const fetchedCustomers = getApiData(customersUrl)
 const fetchedRooms = getApiData(roomsUrl)
