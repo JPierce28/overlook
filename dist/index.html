@@ -7,12 +7,12 @@
   <title>Webpack Starter Kit</title>
 </head>
 <body>
-  <header class="main-header">
+  <header class="main-header hidden">
     <h3 class="customer-name"></h3>
     <h1>Asgard Inn & Suites</h1>
     <button class="my-bookings-button">My Bookings</button>
   </header>
-  <main class="main-section">
+  <main class="main-section hidden">
     <section class="welcome-container">
       <header class="welcome-header">
         <h1 class="error-message">This Could Be Your View!</h1>
@@ -46,6 +46,29 @@
       </section>
     </section>
   </main>
+  <section class="log-in-page">
+    <header class="welcome-screen">
+      <h1>Welcome to Asgard Inn and Suites!</h1>
+      <h2>Please Log in Below!</h2>
+      <p>(Hint use "customer" followed by a number 1-50)</p>
+      <p>Password is: overlook2021</p>
+    </header>
+    <div class="log-in-error-message">
+    </div>
+    <div class="log-in-container">
+      <p>Enter Username Below</p>
+      <form class="username">
+        <input class="username-entry"type="text" name="username" placeholder="username"/>
+      </form>
+      <p>Enter Password Below</p>
+      <form class="password">
+        <input class="password-entry" type="text" name="password" placeholder="password"/>
+      </form>
+      <button id="log-in-button" class="log-in-button">
+        Log-In
+      </button>
+    </div>
+  </section>
   <section class="my-bookings hidden">
     <header class="my-bookings-header">
       <h3 class="my-name"></h3>

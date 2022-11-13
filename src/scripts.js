@@ -5,7 +5,7 @@ import BookingsList from '../src/classes/Booking-list'
 import Guest from '../src/classes/guest'
 import CustomerList from '../src/classes/customer-list'
 import RoomsList from '../src/classes/Rooms'
-import {fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer,  customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, getApiData, postApiData, deleteApi} from './apiCalls'
+import {fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer,  customersUrl, roomsUrl, bookingsUrl, getApiData, postApiData, deleteApi} from './apiCalls'
 
 
 
@@ -25,11 +25,13 @@ const myBookingsButton = document.querySelector('.my-bookings-button')
 const returnHomeButton = document.querySelector('.return-home-button')
 const filterButton = document.querySelector('.filter-by-type')
 const calendarButton = document.querySelector('.calendar-search')
+const loginButton = document.querySelector('.log-in-button')
 const roomTypeSelect = document.querySelector('.select-room-type')
 const defaultValue = document.querySelector('.default-value')
 const calendar = document.querySelector('.calendar') 
 const myBookingsPage = document.querySelector('.my-bookings')
 const homePage = document.querySelector('.main-section')
+const loginPage = document.querySelector('.log-in-page')
 const myPastBookings = document.querySelector('.past-bookings')
 const myFutureBookings = document.querySelector('.future-bookings')
 const availableBookingsContainer = document.querySelector('.available-bookings-container')
@@ -38,27 +40,55 @@ const mainHeader = document.querySelector('.main-header')
 const myBookingsHeader = document.querySelector('.my-booking-header')
 const displayCustomer = document.querySelector('.customer-name')
 const myName = document.querySelector('.my-name')
+const userNameEntry = document.querySelector('.username-entry')
+const passwordEntry = document.querySelector('.password-entry')
+const logInError = document.querySelector('.log-in-error-message')
 
 //events
 
-window.addEventListener('load', function() { 
-getData(),
-loadDate()
-})
 myBookingsButton.addEventListener('click', viewMyBookings)
 returnHomeButton.addEventListener('click', returnHome)
 filterButton.addEventListener('click', filterByRoomType)
 calendarButton.addEventListener('click', filterByDate)
-
-
+loginButton.addEventListener('click', verifyLogIn)
 
 //event handlers
-function loadDate () {
-  calendar.min = `${year}-${month}-${day}`
+
+
+function verifyLogIn() {
+  let username = userNameEntry.value
+  let password = passwordEntry.value
+  let userId = username[8] + username[9] 
+  if(password !== 'overlook2021'){
+    logInError.innerHTML = `<h1>Password is incorrect please try again! (enter: overlook2021)</h1>`
+  } 
+  else if(username[9] === undefined && username[8] > 0){
+    return logIn(username[8])
+  }
+  else if(userId > 50){
+    console.log("more than 50");
+    logInError.innerHTML = `<h1>User Id is out of range please use a number between 1 and 50</h1>`
+  }
+  else if(username[8] < 1){
+    logInError.innerHTML = `<h1>User Id is out of range please use a number between 1 and 50</h1>`
+  }
+  else {
+    logIn(userId)
+  }
 }
 
-function getData() {
-  Promise.all([fetchedCustomers, fetchedRooms, fetchedBookings, fetchedSingleCustomer])
+function logIn(userId) {
+  removeHidden(homePage)
+  removeHidden(mainHeader)
+  addHidden(loginPage)
+  let singleCustomerUrl = `http://localhost:3001/api/v1/customers/${userId}`
+  let fetchedSingleCustomer = getApiData(singleCustomerUrl)
+  loadDate()
+  getData(fetchedSingleCustomer)
+}
+
+function getData(singleUser) {
+  Promise.all([fetchedCustomers, fetchedRooms, fetchedBookings, singleUser])
   .then((data) => {
     allCustomers = new CustomerList(data[0].customers)
     allRooms = new RoomsList(data[1].rooms)
@@ -144,6 +174,7 @@ function loadData(bookingData, roomsData) {
 function viewMyBookings() {
   myPastBookings.innerHTML = ''
   myFutureBookings.innerHTML = ''
+  dateToday()
   myName.innerHTML = `Signed in as: ${currentGuest.name}`
   addHidden(homePage)
   removeHidden(myBookingsPage)
@@ -224,15 +255,27 @@ function deleteBooking(event) {
   fetchDelete(bookingId)
 }
 
+
+
+//helper functions
+
 function returnHome() {
   addHidden(myBookingsPage)
   removeHidden(homePage)
   removeHidden(mainHeader)
 }
 
-//helper functions
+function dateToday() {
+  date = new Date()
+  day = date.getDate()
+  month = date.getMonth()+1
+  year = date.getFullYear()
+  return currentDate = `${year}/${month}/${day}`
+}
 
-
+function loadDate () {
+  calendar.min = `${year}-${month}-${day}`
+}
 
 function addHidden (element) {
   element.classList.add('hidden')
