@@ -2,12 +2,21 @@ const customersUrl = 'http://localhost:3001/api/v1/customers'
 const roomsUrl = 'http://localhost:3001/api/v1/rooms'
 const bookingsUrl = 'http://localhost:3001/api/v1/bookings'
 const singleCustomerUrl = 'http://localhost:3001/api/v1/customers/1'
-
+const deleteBookingUrl = 'http://localhost:3001/api/v1/bookings/'
 function getApiData(url) {
   const fetchedApi = fetch(url)
     .then((response) => response.json())
     .catch(error => console.log('Error: ', error))
   return fetchedApi
+}
+
+function deleteApi(bookingId) {
+  let deleteData = fetch(deleteBookingUrl + bookingId, {
+    method: 'DELETE',
+  })
+  .then(response => response.json())
+  .catch(error => console.log(error))
+  return deleteData
 }
 
 function postApiData(addBooking) {
@@ -35,4 +44,4 @@ const fetchedRooms = getApiData(roomsUrl)
 const fetchedBookings = getApiData(bookingsUrl)
 const fetchedSingleCustomer = getApiData(singleCustomerUrl)
 
-export {customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer, getApiData, postApiData}
+export {customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer, getApiData, postApiData, deleteApi}

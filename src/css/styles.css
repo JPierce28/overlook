@@ -255,6 +255,24 @@ body {
 .book-now:hover {
   transition: 1s ease-in-out;
   background: #c0defb;
+}
+
+.delete-booking{
+  width: 25%;
+  height: 20%;
+  border-radius: 10px;
+  font-size: large;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #5faaef;
+  outline: none;
+  transition: 1s ease-in-out;
+  font-size: large;
+}
+
+.delete-booking:hover {
+  transition: 1s ease-in-out;
+  background: #c0defb;
   
 }
 
