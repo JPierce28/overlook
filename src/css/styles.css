@@ -196,6 +196,11 @@ body {
   background: #c0defb;
 }
 
+.filter-by-type:focus {
+  transition: 1s ease-in-out;
+  background: #c0defb;
+}
+
 .book-room {
   margin: 10px;
   height: 15%;
@@ -239,6 +244,11 @@ body {
   background: #c0defb;
 }
 
+.calendar-search:focus {
+  transition: 1s ease-in-out;
+  background: #c0defb;
+}
+
 .book-now{
   width: 10%;
   height: 20%;
@@ -253,6 +263,11 @@ body {
 }
 
 .book-now:hover {
+  transition: 1s ease-in-out;
+  background: #c0defb;
+}
+
+.book-now:focus {
   transition: 1s ease-in-out;
   background: #c0defb;
 }
@@ -273,7 +288,11 @@ body {
 .delete-booking:hover {
   transition: 1s ease-in-out;
   background: #c0defb;
-  
+}
+
+.delete-booking:focus {
+  transition: 1s ease-in-out;
+  background: #c0defb;
 }
 
 .my-bookings-button {
@@ -294,6 +313,11 @@ body {
   background: #c0defb;
 }
 
+.my-bookings-button:focus {
+  transition: 1s ease-in-out;
+  background: #c0defb;
+}
+
 .return-home-button {
   margin-top: 40px;
   border-radius: 20px;
@@ -307,6 +331,16 @@ body {
   font-size: large;
 }
 
+.return-home-button:hover {
+  transition: 1s ease-in-out;
+  background: #c0defb;
+}
+
+.return-home-button:focus {
+  transition: 1s ease-in-out;
+  background: #c0defb;
+}
+
 .past-bookings{
   width: 50%;
   border-right: solid 2px #5faaef;
@@ -314,11 +348,6 @@ body {
 
 .future-bookings{
   width: 50%;
-}
-
-.return-home-button:hover {
-  transition: 1s ease-in-out;
-  background: #c0defb;
 }
 
 .customer-name{
