@@ -5,7 +5,7 @@ import BookingsList from '../src/classes/Booking-list'
 import Guest from '../src/classes/guest'
 import CustomerList from '../src/classes/customer-list'
 import RoomsList from '../src/classes/Rooms'
-import {fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer,  customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, getApiData, postApiData, deleteApi} from './apiCalls'
+import {fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer,  customersUrl, roomsUrl, bookingsUrl, getApiData, postApiData, deleteApi} from './apiCalls'
 
 
 
@@ -41,24 +41,26 @@ const myName = document.querySelector('.my-name')
 
 //events
 
-window.addEventListener('load', function() { 
-getData(),
-loadDate()
-})
+window.addEventListener('load', logIn)
 myBookingsButton.addEventListener('click', viewMyBookings)
 returnHomeButton.addEventListener('click', returnHome)
 filterButton.addEventListener('click', filterByRoomType)
 calendarButton.addEventListener('click', filterByDate)
-
-
 
 //event handlers
 function loadDate () {
   calendar.min = `${year}-${month}-${day}`
 }
 
-function getData() {
-  Promise.all([fetchedCustomers, fetchedRooms, fetchedBookings, fetchedSingleCustomer])
+function logIn(userId) {
+  let singleCustomerUrl = `http://localhost:3001/api/v1/customers/${userId}`
+  let fetchedSingleCustomer = getApiData(singleCustomerUrl)
+  loadDate()
+  getData(fetchedSingleCustomer)
+}
+
+function getData(singleUser) {
+  Promise.all([fetchedCustomers, fetchedRooms, fetchedBookings, singleUser])
   .then((data) => {
     allCustomers = new CustomerList(data[0].customers)
     allRooms = new RoomsList(data[1].rooms)
@@ -224,15 +226,19 @@ function deleteBooking(event) {
   fetchDelete(bookingId)
 }
 
+
+
+//helper functions
+
+function userLoginId() {
+  
+}
+
 function returnHome() {
   addHidden(myBookingsPage)
   removeHidden(homePage)
   removeHidden(mainHeader)
 }
-
-//helper functions
-
-
 
 function addHidden (element) {
   element.classList.add('hidden')
