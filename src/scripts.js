@@ -5,7 +5,7 @@ import BookingsList from '../src/classes/Booking-list'
 import Guest from '../src/classes/guest'
 import CustomerList from '../src/classes/customer-list'
 import RoomsList from '../src/classes/Rooms'
-import {fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer,  customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, getApiData, postApiData} from './apiCalls'
+import {fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer,  customersUrl, roomsUrl, bookingsUrl, singleCustomerUrl, getApiData, postApiData, deleteApi} from './apiCalls'
 
 
 
@@ -84,7 +84,21 @@ function postBooking(addedBooking) {
       allBookings = new BookingsList(data[0].bookings)
       loadData(allBookings, allRooms)
     })
-  
+}
+
+function fetchDelete(id) {
+  const newDelete = deleteApi(id)
+  Promise.all([newDelete])
+    .then((data) => {
+      console.log(data)
+      return Promise.all([getApiData(bookingsUrl)])
+    })
+    .then((data) => {
+      console.log(data)
+      allBookings = new BookingsList(data[0].bookings)
+      loadData(allBookings, allRooms)
+      viewMyBookings()
+    })
 }
 
 function loadData(bookingData, roomsData) {
@@ -155,11 +169,15 @@ function viewMyBookings() {
       <div class="booking-list"
         <p>Date: ${element.date}</p>
         <p>Room Number: ${element.roomNumber}</p>
-        <p>Booking ID: ${element.id}</p>
+        <button class="delete-booking"id="${element.id}">Cancel Booking</button>
       </div>`
   })
   const allSpent = currentGuest.totalSpent(allBookings, allRooms)
   displaySpent.innerHTML = `<h3 class="filter">Total I've Spent: $${allSpent}</h3>`
+  const deleteButtons = document.querySelectorAll('.delete-booking')
+  deleteButtons.forEach((button) => {
+    button.addEventListener('click', deleteBooking)
+  })
 }
 
 function filterByRoomType() {
@@ -199,6 +217,11 @@ function addBooking(event) {
   const newBooking = {'userID': currentGuest.id, date: currentDate, 'roomNumber': +event.target.id}
   postBooking(newBooking)
   roomTypeSelect.value = defaultValue.value
+}
+
+function deleteBooking(event) {
+  const bookingId = event.target.id
+  fetchDelete(bookingId)
 }
 
 function returnHome() {
