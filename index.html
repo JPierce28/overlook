@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webpack Starter Kit</title>
+</head>
+<body>
+  <header class="main-header hidden">
+    <h3 class="customer-name"></h3>
+    <h1>Asgard Inn & Suites</h1>
+    <button class="my-bookings-button">My Bookings</button>
+  </header>
+  <main class="main-section hidden">
+    <section class="welcome-container">
+      <header class="welcome-header">
+        <h1 class="error-message">This Could Be Your View!</h1>
+      </header>
+      <img id="iceland-image" src="./images/iceland.jpg" alt="welcome image of Iceland">
+      </img>
+    </section>
+    <section class="booking-container">
+      <header class="booking-header">
+        <div class="calendar-container">
+          <label for="calendar">Choose Your Date</label>
+          <input class="calendar" type="date" id="calendar" name="form-date" min="" max="2024-12-31">
+          <button class="calendar-search"> Check Availability</button>
+        </div>
+        <div class="title">
+          <h1>Book Now!</h1>
+        </div>
+        <div class="filter-type">
+          <p class="filter-room-type">Filter By Room Type</p>
+          <select name="all-room-types" class="select-room-type">
+            <option class="default-value" value="Select a Filter">All Available Rooms</option>
+            <option value="suite" >Suite</option>
+            <option value="residential suite">Residential Suite</option>
+            <option value="single room">Single Room</option>
+            <option value="junior suite">Junior Suite</option>
+          </select>
+          <button class="filter-by-type">Check Availability</button>
+        </div>
+      </header>
+      <section class="available-bookings-container"></section>
+      </section>
+    </section>
+  </main>
+  <section class="log-in-page">
+    <header class="welcome-screen">
+      <h1>Welcome to Asgard Inn and Suites!</h1>
+      <h2>Please Log in Below!</h2>
+      <p>(Hint use "customer" followed by a number 1-50, no spaces)</p>
+      <p>Password is: overlook2021</p>
+    </header>
+    <div class="log-in-error-message">
+    </div>
+    <div class="log-in-container">
+      <p>Enter Username Below</p>
+      <form class="username">
+        <input class="username-entry"type="text" name="username" placeholder="username"/>
+      </form>
+      <p>Enter Password Below</p>
+      <form class="password">
+        <input class="password-entry" type="text" name="password" placeholder="password"/>
+      </form>
+      <button id="log-in-button" class="log-in-button">
+        Log-In
+      </button>
+    </div>
+  </section>
+  <section class="my-bookings hidden">
+    <header class="my-bookings-header">
+      <h3 class="my-name"></h3>
+    <h1>My Bookings</h1>
+    <button class="return-home-button">Return Home</button>
+    </header>
+    <header class="my-booking-header hidden">
+      <div class="past-bookings-header">
+        <p>My Past Bookings</p>
+      </div>
+      <div class="total-spent">
+        <h3 class="filter">Total I've Spent: $1000</h3>
+      </div>
+      <div class="future-bookings-header">
+        <p>My Future Bookings</p>
+      </div>
+    </header>
+    <section class="my-booking-container">
+      <section class="past-bookings">
+      </section>
+      <section class="future-bookings">
+      </section>
+  </section>
+  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <script src="bundle.js"></script>
+
+</body>
+</html>
