@@ -5,19 +5,12 @@ import BookingsList from '../src/classes/Booking-list'
 import Guest from '../src/classes/guest'
 import CustomerList from '../src/classes/customer-list'
 import RoomsList from '../src/classes/Rooms'
-import {fetchedBookings, fetchedCustomers, fetchedRooms, fetchedSingleCustomer,  customersUrl, roomsUrl, bookingsUrl, getApiData, postApiData, deleteApi} from './apiCalls'
+import {fetchedBookings, fetchedCustomers, fetchedRooms, bookingsUrl, getApiData, postApiData, deleteApi} from './apiCalls'
 
 
 
 // Global Variables go here
 let currentGuest, allBookings, allRooms, currentDate, date, day, month, year, allCustomers
-
-date = new Date()
-day = date.getDate()
-month = date.getMonth()+1
-year = date.getFullYear()
-currentDate = `${year}/${month}/${day}`
-
 
 //query selectors
 
@@ -45,7 +38,7 @@ const passwordEntry = document.querySelector('.password-entry')
 const logInError = document.querySelector('.log-in-error-message')
 
 //events
-
+window.addEventListener('load', dateToday)
 myBookingsButton.addEventListener('click', viewMyBookings)
 returnHomeButton.addEventListener('click', returnHome)
 filterButton.addEventListener('click', filterByRoomType)
@@ -71,6 +64,9 @@ function verifyLogIn() {
   }
   else if(username[8] < 1){
     logInError.innerHTML = `<h1>User Id is out of range please use a number between 1 and 50</h1>`
+  }
+  else if (username[8] === undefined){
+    logInError.innerHTML = `<h1>User name is incorrect, make sure to type customer</h1>`
   }
   else {
     logIn(userId)
