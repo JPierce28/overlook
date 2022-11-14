@@ -10,18 +10,18 @@ For this project I was tasked with creating a webapp that will allow a user to b
 - Work with an API to send and receive data
 - Solidify the code review process
 - Create a robust test suite that thoroughly tests all functionality of a client-side application
+- Full project and rubric can be found [here](https://frontend.turing.edu/projects/overlook.html)
 
 ## Project Install
-1. Clone this [repo](https://github.com/JPierce28/overlook) to your machine
-2. Clone this [API Data repo](https://github.com/turingschool-examples/webpack-starter-kit) to your machine
-3. Once cloned run npm install on both files
-4. Then run npm start on both files
-5. You can then go to [this link](http://localhost:8080/)
+1. Clone this [API Data repo](https://github.com/turingschool-examples/webpack-starter-kit) to your machine
+2. Once cloned run npm install
+3. Then run npm start
+4. You can then go to [this link]([http://localhost:8080/](https://jpierce28.github.io/overlook/))
 
 
 ## Preview
 
-
+![Screen Shot 2022-11-14 at 2 47 08 PM](https://user-images.githubusercontent.com/110264166/201774920-0c9a2b88-632b-4074-b0a6-e8a869f37531.png)
 
 ## Collaborators
 
@@ -45,3 +45,4 @@ For this project I was tasked with creating a webapp that will allow a user to b
 ### Challenges
 - A big challenge of this project was deciding how to set up my classes and test them. Going into this project without a formal comp to compare and plan off of left a lot of room for intrepretation.
 - This project was my first project implementing test driven development on my own. I had to navigate through the test and verify my testing was complete with happy and sad paths.
+
